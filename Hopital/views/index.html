@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <title>Page d'accueil</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenue sur l'application de gestion de l'hôpital</h1>
+
+    <div id="menu">
+      <!-- Onglets communs pour tous les utilisateurs -->
+      <ul>
+        <li><a href="/views/addPatient.html">Ajouter un patient</a></li>
+        <li><a href="/views/consultPatients.html">Consulter/Supprimer des patients</a></li>
+        <li><a href="/views/managePrinters.html">Gérer les imprimantes</a></li>
+        <li><a href="/views/sendEmail.html">Envoyer un email</a></li>
+        <li><a href="/views/receivedMails.html">Voir mes email</a></li>
+        <li><a href="/api/auth/logout">Déconnexion</a></li>
+      </ul>
+
+      <!-- Onglet supplémentaire pour les administrateurs -->
+      <ul id="admin-section" style="display: none;">
+        <li><a href="/views/addUser.html">Ajouter un utilisateur</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Vérification du rôle de l'utilisateur (admin ou superadmin)
+    fetch('/api/auth/checkRole')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la récupération du rôle');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Vérifier si l'utilisateur a le rôle "admin" ou "superadmin"
+        if (data.role === 'admin' || data.role === 'superadmin') {
+          document.getElementById('admin-section').style.display = 'block';  // Afficher l'onglet "Ajouter un utilisateur"
+        } else {
+          console.log('Utilisateur non-admin et non-superadmin');
+        }
+      })
+      .catch(error => console.error('Erreur:', error));
+  </script>
+  
+</body>
+</html>

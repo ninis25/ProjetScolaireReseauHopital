@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <title>Boîte de réception</title>
+</head>
+<body>
+  <h2>Boîte de réception</h2>
+
+  <ul id="email-list">
+    <!-- Les emails seront listés ici dynamiquement -->
+  </ul>
+
+  <script>
+    // Récupérer et afficher les emails
+    fetch('/api/mail/inbox')
+      .then(response => response.json())
+      .then(emails => {
+        const emailList = document.getElementById('email-list');
+        emails.forEach(email => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<b>De :</b> ${email.from} - <b>Objet :</b> ${email.subject} - <b>Date :</b> ${new Date(email.date).toLocaleString()}`;
+          emailList.appendChild(listItem);
+        });
+      })
+      .catch(err => console.error('Erreur lors de la récupération des emails:', err));
+  </script>
+</body>
+</html>

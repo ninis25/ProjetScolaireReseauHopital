@@ -1,0 +1,19 @@
+{
+    "name": "hospital-app",
+    "version": "1.0.0",
+    "description": "Application de gestion d'hôpital avec serveur de messagerie",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "Anisse Fouka",
+    "license": "MIT",
+    "keywords": [],
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "express": "^4.21.1",
+        "express-session": "^1.18.1",
+        "mongoose": "^8.7.1",
+        "nodemailer": "^6.9.15"
+    }
+}

@@ -1,0 +1,38 @@
+<!-- views/admin.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <title>Panneau d'administration</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Panneau d'administration</h1>
+    
+    <h2>Créer un nouvel utilisateur</h2>
+    <form action="/api/users/create" method="POST">
+      <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+      <input type="password" name="password" placeholder="Mot de passe" required>
+      <select name="role" required>
+        <option value="user">Utilisateur</option>
+        <option value="admin">Administrateur</option>
+      </select>
+      <button type="submit">Créer l'utilisateur</button>
+    </form>
+
+    <!-- Image de déconnexion avec lien -->
+    <p><a href="/api/auth/logout">
+      <img src="/public/images/logout.png" alt="Déconnexion" style="width: 50px;"/>
+      Se déconnecter
+    </a></p>
+
+    <!-- Bouton de retour vers la connexion après déconnexion -->
+    <p><a href="/login.html">
+      <img src="/public/images/login.png" alt="Connexion" style="width: 50px;"/>
+      Retour à la connexion
+    </a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Ajouter un patient</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Ajouter un patient</h1>
+    <form action="/api/patients/add" method="POST">
+      <input type="text" name="firstName" placeholder="Prénom" required>
+      <input type="text" name="lastName" placeholder="Nom" required>
+      <input type="text" name="service" placeholder="Service" required>
+      <input type="date" name="dateOfBirth" placeholder="Date de naissance" required>
+      <input type="text" name="address" placeholder="Adresse">
+      <input type="text" name="phone" placeholder="Téléphone">
+      <button type="submit">Ajouter</button>
+    </form>
+  </div>
+</body>
+</html>

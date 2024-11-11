@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Consultation des patients</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Liste des patients</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Service</th>
+          <th>Date de naissance</th>
+        </tr>
+      </thead>
+      <tbody id="patients-list">
+        <!-- Les patients seront insérés ici via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    fetch('/api/patients')
+      .then(response => response.json())
+      .then(data => {
+        const patientsList = document.getElementById('patients-list');
+        data.forEach(patient => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${patient.lastName}</td>
+            <td>${patient.firstName}</td>
+            <td>${patient.service}</td>
+            <td>${new Date(patient.dateOfBirth).toLocaleDateString()}</td>
+          `;
+          patientsList.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>

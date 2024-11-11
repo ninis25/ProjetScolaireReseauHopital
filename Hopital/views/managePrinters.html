@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Gestion des imprimantes</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Gérer les imprimantes</h1>
+    <form action="/api/printers/add" method="POST">
+      <input type="text" name="printerName" placeholder="Nom de l'imprimante" required>
+      <input type="text" name="department" placeholder="Service" required>
+      <input type="number" name="inkLevel" placeholder="Niveau d'encre (%)" required>
+      <select name="status">
+        <option value="fonctionnelle">Fonctionnelle</option>
+        <option value="hors-service">Hors-Service</option>
+      </select>
+      <button type="submit">Ajouter</button>
+    </form>
+  </div>
+</body>
+</html>

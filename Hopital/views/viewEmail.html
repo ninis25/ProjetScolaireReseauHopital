@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <title>Lire un email</title>
+</head>
+<body>
+  <h2>Contenu de l'email</h2>
+
+  <div id="email-content">
+    <!-- Contenu de l'email affiché ici -->
+  </div>a
+
+  <script>
+    const emailId = window.location.pathname.split('/').pop();
+
+    // Récupérer le contenu d'un email par son ID
+    fetch(`/api/mail/${emailId}`)
+      .then(response => response.json())
+      .then(email => {
+        const emailContent = document.getElementById('email-content');
+        emailContent.innerHTML = `
+          <p><b>De :</b> ${email.from}</p>
+          <p><b>Objet :</b> ${email.subject}</p>
+          <p><b>Date :</b> ${new Date(email.date).toLocaleString()}</p>
+          <p><b>Message :</b></p>
+          <p>${email.body}</p>
+        `;
+      })
+      .catch(err => console.error('Erreur lors de la récupération de l\'email:', err));
+  </script>
+</body>
+</html>

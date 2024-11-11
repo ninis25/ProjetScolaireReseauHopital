@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boîte de réception</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 50%;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .mail {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Boîte de réception</h1>
+  <div id="mails-container"></div>
+</div>
+
+<script>
+  // Fonction pour récupérer et afficher les emails reçus
+  async function fetchReceivedMails() {
+    try {
+      const response = await fetch('/api/mail/received', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const mails = await response.json();
+      const mailsContainer = document.getElementById('mails-container');
+
+      if (mails.length === 0) {
+        mailsContainer.innerHTML = '<p>Aucun email reçu</p>';
+      } else {
+        mails.forEach(mail => {
+          const mailDiv = document.createElement('div');
+          mailDiv.classList.add('mail');
+          mailDiv.innerHTML = `
+              <p><strong>De :</strong> ${mail.from.username} (${mail.from.email})</p>
+              <p><strong>Sujet :</strong> ${mail.subject}</p>
+              <p>${mail.body}</p>
+            `;
+          mailsContainer.appendChild(mailDiv);
+        });
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des mails:', error);
+    }
+  }
+
+  // Appeler la fonction pour récupérer les emails dès que la page est chargée
+  document.addEventListener('DOMContentLoaded', fetchReceivedMails);
+</script>
+</body>
+</html>

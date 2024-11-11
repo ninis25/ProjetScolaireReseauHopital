@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <title>Envoyer un email</title>
+</head>
+<body>
+<h1>Envoyer un email</h1>
+
+<form action="/api/mail/send" method="POST">
+    <!-- L'email de l'expéditeur est rempli automatiquement et non modifiable -->
+    <label for="fromEmail">De (Email expéditeur) :</label>
+    <input type="email" name="fromEmail" id="fromEmail" value="<%= senderEmail %>" readonly><br>
+
+    <!-- À (Email destinataire) -->
+    <label for="toEmail">À (Email destinataire) :</label>
+    <input type="email" name="toEmail" id="toEmail" required><br>
+
+    <!-- Objet de l'email -->
+    <label for="subject">Objet :</label>
+    <input type="text" name="subject" id="subject" required><br>
+
+    <!-- Message -->
+    <label for="body">Message :</label>
+    <textarea name="body" id="body" rows="4" required></textarea><br>
+
+    <button type="submit">Envoyer l'email</button>
+</form>
+</body>
+</html>
